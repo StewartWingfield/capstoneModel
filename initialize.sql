@@ -14,7 +14,7 @@ CREATE TABLE budget (
   `userId` INT NOT NULL,
   `salary` DECIMAL(10, 2) NOT NULL,
   `necessities` DECIMAL(10, 2) NOT NULL,
-  `other` DECIMAL(10, 2),
+  `other_expenses` DECIMAL(10, 2),
   PRIMARY KEY (`id`),
   FOREIGN KEY (`userId`) REFERENCES users(`id`)
 );
