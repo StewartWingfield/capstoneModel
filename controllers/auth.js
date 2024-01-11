@@ -34,22 +34,24 @@ const login = (req, res) => {
     if (err) return handleSQLError(res, err);
     if (!rows.length) return res.status(404).send("No matching users");
 
-    const hash = rows[0].password;
+    const hash = rows[0].pw;
     bcrypt.compare(password, hash).then((result) => {
       if (!result) return res.status(400).send("Invalid password");
 
       const data = { ...rows[0] };
-      data.password = "REDACTED";
+      data.email = "REDACTED";
+      data.pw = "REDACTED";
 
-      /* const token = jwt.sign(data, 'secret')
-        res.json({
-          msg: 'Login successful',
-          token
-        }) */
+      const token = jwt.sign(data, process.env.JWT_SECRET);
+      res.json({
+        msg: "Login successful",
+        token,
+      });
     });
   });
 };
 
 module.exports = {
   signup,
+  login,
 };
