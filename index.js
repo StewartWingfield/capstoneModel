@@ -1,17 +1,19 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 
 const usersRouter = require("./routers/users");
 const authRouter = require("./routers/auth");
-const budgetRouter = require("./routers/budget");
+/* const budgetRouter = require("./routers/budget"); */
 
 const app = express();
 const port = process.env.PORT || 4001;
 
+app.use(cors());
 app.use(express.json());
 app.use("/users", usersRouter);
 app.use("/auth", authRouter);
-app.use("/budget", budgetRouter);
+/* app.use("/budget", budgetRouter); */
 
 app.get("/", (req, res) => {
   res.send("Welcome to our server!");
