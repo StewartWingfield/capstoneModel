@@ -42,6 +42,8 @@ const login = (req, res) => {
       data.email = "REDACTED";
       data.pw = "REDACTED";
 
+      console.log(data);
+
       const token = jwt.sign(data, process.env.JWT_SECRET);
       res.json({
         msg: "Login successful",

@@ -9,6 +9,18 @@ const listBudgetItems = (req, res) => {
   });
 };
 
+const listBudgetItemsByUser = (req, res) => {
+  let userId = req.userToken.id; // check .id
+  let sql = "SELECT * FROM budget WHERE userId = ?";
+
+  sql = mysql.format(sql, [userId]);
+
+  pool.query(sql, (err, rows) => {
+    if (err) return handleSQLError(res, err);
+    return res.json(rows);
+  });
+};
+
 const updateSalary = (req, res) => {
   let sql = "UPDATE budget SET salary = ?";
   sql = mysql.format(sql, [req.body.salary]);
@@ -22,4 +34,5 @@ const updateSalary = (req, res) => {
 module.exports = {
   listBudgetItems,
   updateSalary,
+  listBudgetItemsByUser,
 };

@@ -3,9 +3,9 @@ const budgetController = require("../controllers/budget");
 const router = express.Router();
 const { verifyJwt } = require("../middleware/auth");
 
-router.get("/", verifyJwt, budgetController);
-
 router.get("/", budgetController.listBudgetItems);
+
+router.get("/", budgetController.listBudgetItemsByUser);
 
 router.post("/", budgetController.updateSalary);
 
