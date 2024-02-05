@@ -10,7 +10,7 @@ const listBudgetItems = (req, res) => {
 };
 
 const listBudgetItemsByUser = (req, res) => {
-  let userId = req.userToken.id; // check .id
+  let userId = req.userToken.id;
   let sql = "SELECT * FROM budget WHERE userId = ?";
 
   sql = mysql.format(sql, [userId]);
@@ -21,18 +21,7 @@ const listBudgetItemsByUser = (req, res) => {
   });
 };
 
-const updateSalary = (req, res) => {
-  let sql = "UPDATE budget SET salary = ?";
-  sql = mysql.format(sql, [req.body.salary]);
-
-  pool.query(sql, (err, results) => {
-    if (err) return handleSQLError(res, err);
-    return res.status(204).json();
-  });
-};
-
 module.exports = {
   listBudgetItems,
-  updateSalary,
   listBudgetItemsByUser,
 };

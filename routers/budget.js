@@ -5,8 +5,6 @@ const { verifyJwt } = require("../middleware/auth");
 
 router.get("/", budgetController.listBudgetItems);
 
-router.get("/", budgetController.listBudgetItemsByUser);
-
-router.post("/", budgetController.updateSalary);
+router.get("/user", verifyJwt, budgetController.listBudgetItemsByUser);
 
 module.exports = router;

@@ -11,7 +11,7 @@ const verifyJwt = (req, res, next) => {
 
   if (signToken) {
     try {
-      let notSignedToken = jwt.sign(signToken, process.env.JWT_SECRET);
+      let notSignedToken = jwt.verify(signToken, process.env.JWT_SECRET);
       req.userToken = notSignedToken;
       next();
     } catch (err) {
